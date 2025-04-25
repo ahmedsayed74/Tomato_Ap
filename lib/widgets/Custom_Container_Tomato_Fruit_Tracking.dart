@@ -12,12 +12,19 @@ class CustomContainerTomatoFruitTracking extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 18),
       child: Container(
-        // width: MediaQuery.of(context).size.height,
         width: double.infinity,
         height: 240,
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(10),
+          border: Border.all(width: 0.3, color: Colors.grey),
+          borderRadius: BorderRadius.circular(10.0),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black12,
+              blurRadius: 10,
+              offset: Offset(0, 2),
+            ),
+          ],
         ),
         child: Padding(
           padding: const EdgeInsets.all(12.0),
@@ -205,6 +212,7 @@ class CustomContainerTomatoFruitTracking extends StatelessWidget {
                     SizedBox(width: 16),
                     Expanded(
                       child: CustomButton(
+                        borderRadius: BorderRadius.circular(10),
                         title: 'Update Status',
                         color: kPraimaryColor,
                         width: MediaQuery.of(context).size.height,

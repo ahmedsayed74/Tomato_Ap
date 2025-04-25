@@ -16,7 +16,15 @@ class TabTwoTomatoFruitTracking extends StatelessWidget {
 
           decoration: BoxDecoration(
             color: Colors.white,
+            border: Border.all(width: 0.4, color: Colors.grey),
             borderRadius: BorderRadius.circular(10),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.2),
+                spreadRadius: 5,
+                blurRadius: 10,
+              ),
+            ],
           ),
           child: Padding(
             padding: const EdgeInsets.all(10.0),

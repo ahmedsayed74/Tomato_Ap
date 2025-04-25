@@ -59,6 +59,13 @@ class HomePage extends StatelessWidget {
                     border: Border.all(width: 0.4, color: Colors.grey),
                     borderRadius: BorderRadius.circular(10),
                     color: const Color(0xffFFFFFF),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.2),
+                        spreadRadius: 3,
+                        blurRadius: 6,
+                      ),
+                    ],
                   ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -76,12 +83,13 @@ class HomePage extends StatelessWidget {
                         onTap: () {
                           Navigator.pushNamed(context, ScanTrackTomato.id);
                         },
-                        child: const CustomButton(
+                        child: CustomButton(
                           fontsize: 16,
                           width: 340,
                           height: 60,
                           title: 'Enter as Farmer',
                           color: kPraimaryColor,
+                          borderRadius: BorderRadius.circular(10),
                         ),
                       ),
                     ],
@@ -96,6 +104,13 @@ class HomePage extends StatelessWidget {
                     border: Border.all(width: 0.4, color: Colors.grey),
                     borderRadius: BorderRadius.circular(10),
                     color: const Color(0xffFFFFFF),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.2),
+                        spreadRadius: 3,
+                        blurRadius: 6,
+                      ),
+                    ],
                   ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -113,12 +128,13 @@ class HomePage extends StatelessWidget {
                         onTap: () {
                           Navigator.pushNamed(context, TomatoMarketplace.id);
                         },
-                        child: const CustomButton(
+                        child: CustomButton(
                           fontsize: 16,
                           width: 340,
                           height: 60,
                           title: 'Enter as buyer',
                           color: kSecondaryColor,
+                          borderRadius: BorderRadius.circular(10),
                         ),
                       ),
                     ],

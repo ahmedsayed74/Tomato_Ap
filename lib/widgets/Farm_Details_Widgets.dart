@@ -1,11 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:tomatooo_app/Constants.dart';
 import 'package:tomatooo_app/widgets/Custom_Button_icon.dart';
 
 class FarmDetailsWidgets extends StatelessWidget {
-  FarmDetailsWidgets({super.key ,});
- final String img = 'assets/Images/download.jpg';
+const  FarmDetailsWidgets({super.key});
+  final String img = 'assets/Images/download.jpg';
+  Future<void> _takePhoto(BuildContext context) async {
+    final ImagePicker picker = ImagePicker();
+    final XFile? photo = await picker.pickImage(source: ImageSource.camera);
+
+    if (photo != null) {
+      // You can do something with the photo here
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('Photo captured: ${photo.name}')));
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -413,6 +425,68 @@ class FarmDetailsWidgets extends StatelessWidget {
             iconsize: 20,
             border: Border.all(width: 0),
             fontcolor: Colors.white,
+          ),
+          SizedBox(height: 30),
+          Container(
+            width: double.infinity,
+            height: 380,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CircleAvatar(
+                    radius: 55,
+                    backgroundColor: kbackgroundColorTwo,
+                    child: Icon(
+                      Icons.camera_alt_outlined,
+                      size: 35,
+                      color: kSecondaryColor,
+                    ),
+                  ),
+                  const SizedBox(height: 14),
+                  Text(
+                    'Take a Photo of Your Tomato',
+                    style: TextStyle(
+                      fontFamily: kFontFamily,
+                      fontSize: 24,
+                      fontWeight: FontWeight.w900,
+                    ),
+                  ),
+                  const SizedBox(height: 14),
+                  Text(
+                    'Capture an image of your tomato to analyze its quality and freshness',
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      fontFamily: kFontFamily,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w400,
+                      color: kThirdColor,
+                    ),
+                  ),
+                  const SizedBox(height: 26),
+                  GestureDetector(
+                    onTap: () => _takePhoto(context),
+                    child: CustomButtonIcon(
+                      title: 'Take Photo',
+                      color: kSecondaryColor,
+                      IconData: Icons.camera_alt_outlined,
+                      iconColor: Colors.white,
+                      width: double.infinity,
+                      height: 50,
+                      fontsize: 17,
+                      iconsize: 17,
+                      border: Border.all(width: 0),
+                      fontcolor: Colors.white,
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ),
           SizedBox(height: 30),
         ],

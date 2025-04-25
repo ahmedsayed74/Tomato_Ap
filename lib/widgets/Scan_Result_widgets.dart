@@ -178,6 +178,7 @@ class ScanResultWidgets extends StatelessWidget {
               width: double.infinity,
               height: 55,
               fontsize: 16,
+              borderRadius: BorderRadius.circular(10),
             ),
           ),
           SizedBox(height: 20),

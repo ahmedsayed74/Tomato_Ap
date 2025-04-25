@@ -179,12 +179,13 @@ class CustomContainerGrowthStage extends StatelessWidget {
                     fontsize: 13,
                     iconsize: 13,
                   ),
-                  const CustomButton(
+                  CustomButton(
                     fontsize: 13,
                     title: 'Update Status',
                     color: kPraimaryColor,
                     width: 160,
                     height: 45,
+                    borderRadius: BorderRadius.circular(10),
                   ),
                 ],
               ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tomatooo_app/Constants.dart';
-import 'package:tomatooo_app/Screens/Farm_Details.dart';
+import 'package:tomatooo_app/Screens/farmdetails.dart';
 
 class ContainerOntabTomatoMarketplace extends StatelessWidget {
   const ContainerOntabTomatoMarketplace({super.key});
@@ -14,7 +14,15 @@ class ContainerOntabTomatoMarketplace extends StatelessWidget {
         height: 220,
         decoration: BoxDecoration(
           color: Color(0xffFFFFFF),
+          border: Border.all(width: 0.4, color: Colors.grey),
           borderRadius: BorderRadius.circular(10),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.2),
+              spreadRadius: 3,
+              blurRadius: 6,
+            ),
+          ],
         ),
         child: Padding(
           padding: const EdgeInsets.all(12),

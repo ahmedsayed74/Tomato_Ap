@@ -150,6 +150,7 @@ class _PlanetInformationContainerState
             ),
           ),
           const SizedBox(height: 30),
+          
         ],
       ),
     );

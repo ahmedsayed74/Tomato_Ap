@@ -1,15 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:tomatooo_app/Constants.dart';
-import 'package:tomatooo_app/Screens/Leaf_Recognition.dart';
 import 'package:tomatooo_app/Screens/Tomato_Fruit_Tracking.dart';
-import 'package:tomatooo_app/Screens/Tomato_Fruit_TrackingTwo.dart';
 import 'package:tomatooo_app/widgets/Custom_Button_icon.dart';
 import 'package:tomatooo_app/widgets/Custom_Container_widget.dart';
 
 class ScanTrackTomato extends StatelessWidget {
   const ScanTrackTomato({super.key});
   static String id = 'Scan';
+  Future<void> _takePhoto(BuildContext context) async {
+    final ImagePicker picker = ImagePicker();
+    final XFile? photo = await picker.pickImage(source: ImageSource.camera);
+
+    if (photo != null) {
+      // You can do something with the photo here
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('Photo captured: ${photo.name}')));
+    }
+  }
+
   @override
   // this Page use for scan , detect disease and Track Fruit Development
   Widget build(BuildContext context) {
@@ -56,6 +67,13 @@ class ScanTrackTomato extends StatelessWidget {
                     border: Border.all(width: 0.4, color: Colors.grey),
                     borderRadius: BorderRadius.circular(10),
                     color: const Color(0xffFFFFFF),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.2),
+                        spreadRadius: 3,
+                        blurRadius: 6,
+                      ),
+                    ],
                   ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -70,9 +88,7 @@ class ScanTrackTomato extends StatelessWidget {
                         iconColor: kPraimaryColor,
                       ),
                       GestureDetector(
-                        onTap: () {
-                          Navigator.pushNamed(context, LeafRecognition.id);
-                        },
+                        onTap: () => _takePhoto(context),
                         child: CustomButtonIcon(
                           fontcolor: Colors.white,
                           border: Border.all(width: 0),
@@ -97,6 +113,13 @@ class ScanTrackTomato extends StatelessWidget {
                     border: Border.all(width: 0.4, color: Colors.grey),
                     borderRadius: BorderRadius.circular(10),
                     color: const Color(0xffFFFFFF),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.2),
+                        spreadRadius: 3,
+                        blurRadius: 6,
+                      ),
+                    ],
                   ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
