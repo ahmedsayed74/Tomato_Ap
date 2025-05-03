@@ -1,20 +1,66 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'package:tomatooo_app/Constants.dart';
+import 'package:tomatooo_app/Screens/Profile_Page.dart';
 import 'package:tomatooo_app/Screens/Tomato_Fruit_Tracking.dart';
+import 'package:tomatooo_app/Screens/homepage.dart';
 import 'package:tomatooo_app/widgets/Custom_Button_icon.dart';
 import 'package:tomatooo_app/widgets/Custom_Container_widget.dart';
 
-class ScanTrackTomato extends StatelessWidget {
+class ScanTrackTomato extends StatefulWidget {
   const ScanTrackTomato({super.key});
   static String id = 'Scan';
+
+  @override
+  State<ScanTrackTomato> createState() => _ScanTrackTomatoState();
+}
+
+class _ScanTrackTomatoState extends State<ScanTrackTomato>
+    with TickerProviderStateMixin {
+  late TabController tabController;
+
+  int _currentIndex = 0;
+
+  @override
+  void initState() {
+    tabController = TabController(length: 2, vsync: this);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    tabController.dispose();
+    super.dispose();
+  }
+
+  final _items = [
+    SalomonBottomBarItem(
+      icon: Icon(Icons.house_outlined),
+      title: Text('Home'),
+      selectedColor: Colors.white,
+      unselectedColor: Colors.grey,
+    ),
+    SalomonBottomBarItem(
+      icon: Icon(Icons.shopping_cart_outlined),
+      title: Text('Shopping'),
+      selectedColor: Colors.white,
+      unselectedColor: Colors.grey,
+    ),
+    SalomonBottomBarItem(
+      icon: Icon(Icons.person_outlined),
+      title: Text('Person'),
+      selectedColor: Colors.white,
+      unselectedColor: Colors.grey,
+    ),
+  ];
+
   Future<void> _takePhoto(BuildContext context) async {
     final ImagePicker picker = ImagePicker();
     final XFile? photo = await picker.pickImage(source: ImageSource.camera);
 
     if (photo != null) {
-      // You can do something with the photo here
       ScaffoldMessenger.of(
         context,
       ).showSnackBar(SnackBar(content: Text('Photo captured: ${photo.name}')));
@@ -22,7 +68,6 @@ class ScanTrackTomato extends StatelessWidget {
   }
 
   @override
-  // this Page use for scan , detect disease and Track Fruit Development
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: kbackgroundColor,
@@ -32,7 +77,7 @@ class ScanTrackTomato extends StatelessWidget {
         backgroundColor: const Color(0xffDCFCE7),
         automaticallyImplyLeading: false,
         title: const Text(
-          'Welcome,Farmer!',
+          'Welcome, Farmer!',
           style: TextStyle(
             fontFamily: kFontFamily,
             fontSize: 24,
@@ -146,7 +191,7 @@ class ScanTrackTomato extends StatelessWidget {
                           height: 60,
                           title: 'Track Fruit Development',
                           color: kPraimaryColor,
-                          IconData: FontAwesomeIcons.waveSquare,
+                          IconData: Icons.show_chart,
                           iconColor: Colors.white,
                         ),
                       ),
@@ -157,6 +202,34 @@ class ScanTrackTomato extends StatelessWidget {
               ],
             ),
           ],
+        ),
+      ),
+      bottomNavigationBar: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(35),
+          color: const Color(0xff282F3C),
+        ),
+        margin: const EdgeInsets.only(left: 15, right: 15, bottom: 15),
+        child: SalomonBottomBar(
+          curve: Curves.ease,
+          margin: const EdgeInsets.all(10),
+          duration: const Duration(milliseconds: 300),
+          items: _items,
+          currentIndex: _currentIndex,
+          onTap: (index) {
+            setState(() {
+              _currentIndex = index;
+            });
+
+            // Navigation logic
+            if (index == 0) {
+              Navigator.pushReplacementNamed(context, ScanTrackTomato.id);
+            } else if (index == 1) {
+              Navigator.maybePop(context, HomePage.id);
+            } else if (index == 2) {
+              Navigator.pushReplacementNamed(context, ProfilePage.id);
+            }
+          },
         ),
       ),
     );

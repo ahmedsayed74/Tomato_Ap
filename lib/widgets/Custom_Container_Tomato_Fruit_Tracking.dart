@@ -1,11 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:tomatooo_app/Constants.dart';
 import 'package:tomatooo_app/widgets/Custom_Button.dart';
 import 'package:tomatooo_app/widgets/Custom_Button_icon.dart';
 
 class CustomContainerTomatoFruitTracking extends StatelessWidget {
   const CustomContainerTomatoFruitTracking({super.key});
+  Future<void> _takePhoto(BuildContext context) async {
+    final ImagePicker picker = ImagePicker();
+    final XFile? photo = await picker.pickImage(source: ImageSource.camera);
+
+    if (photo != null) {
+      // You can do something with the photo here
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('Photo captured: ${photo.name}')));
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -126,9 +138,11 @@ class CustomContainerTomatoFruitTracking extends StatelessWidget {
                         SizedBox(height: 10),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Column(
                               mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
                                   'Healthy flowers,good ',
@@ -159,6 +173,8 @@ class CustomContainerTomatoFruitTracking extends StatelessWidget {
                                 ),
                                 SizedBox(width: 5),
                                 Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
                                       '45 days to',
@@ -196,17 +212,20 @@ class CustomContainerTomatoFruitTracking extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Expanded(
-                      child: CustomButtonIcon(
-                        title: 'Update Photo',
-                        color: Colors.white,
-                        IconData: Icons.camera_alt_outlined,
-                        iconColor: Colors.black,
-                        width: MediaQuery.of(context).size.height,
-                        height: 45,
-                        fontsize: 14.2,
-                        iconsize: 17,
-                        border: Border.all(width: 0.4, color: Colors.grey),
-                        fontcolor: Colors.black,
+                      child: GestureDetector(
+                        onTap: () => _takePhoto(context),
+                        child: CustomButtonIcon(
+                          title: 'Update Photo',
+                          color: Colors.white,
+                          IconData: Icons.camera_alt_outlined,
+                          iconColor: Colors.black,
+                          width: MediaQuery.of(context).size.height,
+                          height: 45,
+                          fontsize: 14.2,
+                          iconsize: 17,
+                          border: Border.all(width: 0.4, color: Colors.grey),
+                          fontcolor: Colors.black,
+                        ),
                       ),
                     ),
                     SizedBox(width: 16),

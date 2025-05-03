@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'package:tomatooo_app/Constants.dart';
+import 'package:tomatooo_app/Screens/Profile_Page.dart';
+import 'package:tomatooo_app/Screens/homepage.dart';
 import 'package:tomatooo_app/widgets/OnTab_Tomato_Market_Two.dart';
 import 'package:tomatooo_app/widgets/OnTab_Tomato_Market_one.dart';
 
@@ -34,7 +37,7 @@ class _TomatoMarketplaceState extends State<TomatoMarketplace>
       unselectedColor: Colors.white,
     ),
     SalomonBottomBarItem(
-      icon: Icon(Icons.shopping_cart_outlined),
+      icon: Icon(FontAwesomeIcons.leaf),
       title: Text('Shopping'),
       selectedColor: Colors.white,
       unselectedColor: Colors.white,
@@ -157,23 +160,33 @@ class _TomatoMarketplaceState extends State<TomatoMarketplace>
           ],
         ),
       ),
-      // bottomSheet: _screens[_currentIndex],
+
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(35),
-          color: Color(0xff282F3C),
+          color: const Color(0xff282F3C),
         ),
-        margin: EdgeInsets.only(left: 15, right: 15, bottom: 15),
+        margin: const EdgeInsets.only(left: 15, right: 15, bottom: 15),
         child: SalomonBottomBar(
           curve: Curves.ease,
-          margin: EdgeInsets.all(10),
-          duration: Duration(seconds: 1),
+          margin: const EdgeInsets.all(10),
+          duration: const Duration(milliseconds: 300),
           items: _items,
           currentIndex: _currentIndex,
           onTap: (index) {
             setState(() {
               _currentIndex = index;
             });
+
+            // Navigation logic
+            if (index == 0) {
+              Navigator.pushReplacementNamed(context, TomatoMarketplace.id);
+            } else if (index == 1) {
+              Navigator.maybePop(context, HomePage.id);
+            } else if (index == 2) {
+              Navigator.pushReplacementNamed(context, ProfilePage.id);
+
+            }
           },
         ),
       ),
